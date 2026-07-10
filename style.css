@@ -12,6 +12,10 @@ body{
   box-sizing: border-box;
 }
 
+*{
+  box-sizing: border-box;
+}
+
 @keyframes fadeBG{
   0%{background-position: 0% 50%;}
   50%{background-position: 100% 50%;}
@@ -146,7 +150,7 @@ li{
   .main-content{
     flex-direction: column;
   }
-
+  .left-panel,
   .right-panel{
     width: 100%;
   }
