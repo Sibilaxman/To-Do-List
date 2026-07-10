@@ -7,13 +7,23 @@
     <link rel = "stylesheet" href = "style.css">
   </head>
   <body>
-    <div class = "todo-container">
+    <div class="todo-container">
       <h1>🗂️ Daily Desk</h1>
-      <div class = "input-area">
-        <input type = "text" id = "taskInput" placeholder = "Enter your task">
-        <button onclick = "addTask()">Add ➕</button>
+      <div class="main-content">
+        <div class="left-panel">
+          <div class="input-area">
+            <input type="text" id="taskInput" placeholder="Enter your task">
+            <button onclick="addTask()">Add ➕</button>
+          </div>
+          <ul id="taskList"></ul>
+        </div>
+        <div class="right-panel">
+          <h3>Today’s Focus</h3>
+          <p>✔ Plan your day</p>
+          <p>✔ Complete important tasks</p>
+          <p>✔ Stay organized with Daily Desk</p>
+        </div>
       </div>
-      <ul id = "taskList"></ul>
     </div>
     <script src = "script.js"></script>
   </body>
