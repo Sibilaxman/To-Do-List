@@ -1,30 +1,59 @@
-function addTask() {
+let currentUser = localStorage.getItem("currentUser");
+
+if (!currentUser){
+    currentUser = prompt("Enter your username");
+    if (currentUser) {
+        localStorage.setItem("currentUser", currentUser);
+    }
+}
+
+const taskList = document.getElementById("taskList");
+
+window.onload = function(){
+    const savedTasks = JSON.parse(localStorage.getItem(currentUser + "_tasks")) || [];
+    savedTasks.forEach(task => createTaskElement(task.text, task.completed));
+};
+
+function addTask(){
     const taskInput = document.getElementById("taskInput");
     const taskText = taskInput.value.trim();
 
-    if (taskText === "") {
+    if (taskText === ""){
         alert("Please enter a task");
         return;
     }
 
+    createTaskElement(taskText, false);
+    saveTasks();
+    taskInput.value = "";
+}
+
+function createTaskElement(taskText, completed){
     const li = document.createElement("li");
+
     const taskSpan = document.createElement("span");
     taskSpan.textContent = taskText;
+
+    if (completed){
+        taskSpan.classList.add("done");
+    }
 
     const doneBtn = document.createElement("button");
     doneBtn.textContent = "Done";
     doneBtn.className = "done-btn";
 
-    doneBtn.onclick = function () {
+    doneBtn.onclick = function(){
         taskSpan.classList.toggle("done");
+        saveTasks();
     };
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.className = "delete-btn";
 
-    deleteBtn.onclick = function () {
+    deleteBtn.onclick = function(){
         li.remove();
+        saveTasks();
     };
 
     const buttonGroup = document.createElement("div");
@@ -33,7 +62,21 @@ function addTask() {
 
     li.appendChild(taskSpan);
     li.appendChild(buttonGroup);
-    document.getElementById("taskList").appendChild(li);
+    taskList.appendChild(li);
+}
 
-    taskInput.value = "";
+function saveTasks(){
+    const tasks = [];
+
+    document.querySelectorAll("#taskList li").forEach(li => {
+        const taskText = li.querySelector("span").textContent;
+        const completed = li.querySelector("span").classList.contains("done");
+
+        tasks.push({
+            text: taskText,
+            completed: completed
+        });
+    });
+
+    localStorage.setItem(currentUser + "_tasks", JSON.stringify(tasks));
 }
