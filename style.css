@@ -13,22 +13,16 @@ body{
 }
 
 @keyframes fadeBG{
-  0%{
-    background-position: 0% 50%;
-  }
-  50%{
-    background-position: 100% 50%;
-  }
-  100%{
-    background-position: 0% 50%;
-  }
+  0%{background-position: 0% 50%;}
+  50%{background-position: 100% 50%;}
+  100%{background-position: 0% 50%;}
 }
 
 .todo-container{
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(12px);
   width: 100%;
-  max-width: 420px;
+  max-width: 850px;
   padding: 25px;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(138, 43, 226, 0.5),
@@ -43,9 +37,11 @@ h1{
                0 0 15px rgba(37, 99, 235, 0.7);
 }
 
+.user-area,
 .input-area{
   display: flex;
   gap: 10px;
+  margin-bottom: 15px;
 }
 
 input{
@@ -76,6 +72,30 @@ button{
 
 button:hover{
   transform: scale(1.05);
+}
+
+.main-content{
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.left-panel{
+  flex: 2;
+}
+
+.right-panel{
+  flex: 1;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 15px;
+  padding: 20px;
+  color: white;
+  text-align: left;
+}
+
+.right-panel h3{
+  margin-top: 0;
+  color: #e9d5ff;
 }
 
 ul{
@@ -118,11 +138,22 @@ li{
   padding: 6px 10px;
 }
 
-@media(max-width: 480px){
+@media (max-width: 768px){
+  .main-content{
+    flex-direction: column;
+  }
+
+  .right-panel{
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px){
   .todo-container{
     padding: 20px;
   }
 
+  .user-area,
   .input-area{
     flex-direction: column;
   }
