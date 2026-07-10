@@ -1,30 +1,41 @@
 <!DOCTYPE html>
-<html lang = "en">
-  <head>
-    <meta charset = "UTF-8">
-    <meta name = "viewport" content = "width = device-width , initial-scale = 1.0"> 
-    <title>DD</title>
-    <link rel = "stylesheet" href = "style.css">
-  </head>
-  <body>
-    <div class="todo-container">
-      <h1>🗂️ Daily Desk</h1>
-      <div class="main-content">
-        <div class="left-panel">
-          <div class="input-area">
-            <input type="text" id="taskInput" placeholder="Enter your task">
-            <button onclick="addTask()">Add ➕</button>
-          </div>
-          <ul id="taskList"></ul>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DD</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="todo-container">
+    <h1>🗂️ Daily Desk</h1>
+
+    <div class="user-area">
+      <input type="text" id="usernameInput" placeholder="Enter your username">
+      <button onclick="setUser()">Set User</button>
+    </div>
+
+    <div class="main-content">
+      <div class="left-panel">
+
+        <div class="input-area">
+          <input type="text" id="taskInput" placeholder="Enter your task">
+          <button onclick="addTask()">Add ➕</button>
         </div>
-        <div class="right-panel">
-          <h3>Today’s Focus</h3>
-          <p>✔ Plan your day</p>
-          <p>✔ Complete important tasks</p>
-          <p>✔ Stay organized with Daily Desk</p>
-        </div>
+
+        <ul id="taskList"></ul>
+      </div>
+
+      <div class="right-panel">
+        <h3>Today’s Focus</h3>
+        <p>✔ Plan your day</p>
+        <p>✔ Complete important tasks</p>
+        <p>✔ Stay organized with Daily Desk</p>
       </div>
     </div>
-    <script src = "script.js"></script>
-  </body>
-</html>      
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
