@@ -6,12 +6,12 @@ body{
   padding:  50px;
 }
 
-.Todo-container{
+.todo-container{
   background: white;
   padding: 30px;
   width: 350px;
   border-radius: 10px;
-  box-shadow: 0 4px 8 px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 h1{
