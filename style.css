@@ -1,1 +1,70 @@
+body{
+  font-family: Arial , serif;
+  background: #f3f4f6;
+  display: flex;
+  justify-content: center;
+  padding:  50px;
+}
+
+.Todo-container{
+  background: white;
+  padding: 30px;
+  width: 350px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8 px rgba(0,0,0,0.1);
+}
+
+h1{
+  text-align: center;
+}
+
+.input-area{
+  display: flex;
+  gap: 10px;
+}
+
+input{
+  flex: 1;
+  padding: 8px;
+}
+
+button{
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+ul{
+  padding: 0;
+  list-style: none;
+  margin-top: 15px;
+}
+
+li{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9fafb;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+}
+
+.done{
+  text-decoration: line-through;
+  color: gray;
+}
+
+.done-btn{
+  background: green;
+  color: white;
+  border: none;
+  margin-right: 5px;
+}
+
+.delete-btn{
+  background:red;
+  color:white;
+  border:none;
+}
+
 
