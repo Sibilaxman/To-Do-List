@@ -1,98 +1,187 @@
-let currentUser = localStorage.getItem("currentUser");
-const taskList = document.getElementById("taskList");
-
-window.onload = function(){
-  if(currentUser){
-    document.getElementById("usernameInput").value = currentUser;
-    loadTasks();
-  }
-};
-
-function setUser(){
-  const username = document.getElementById("usernameInput").value.trim();
-
-  if(username === ""){
-    alert("Please enter a username");
-    return;
-  }
-
-  currentUser = username;
-  localStorage.setItem("currentUser", currentUser);
-  taskList.innerHTML = "";
-  loadTasks();
+body{
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #4b0082, #6a0dad, #2563eb);
+  background-size: 300% 300%;
+  animation: fadeBG 10s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 15px;
+  box-sizing: border-box;
 }
 
-function loadTasks(){
-  const savedTasks = JSON.parse(localStorage.getItem(currentUser + "_tasks")) || [];
-  savedTasks.forEach(task => createTaskElement(task.text, task.completed));
+@keyframes fadeBG{
+  0%{background-position: 0% 50%;}
+  50%{background-position: 100% 50%;}
+  100%{background-position: 0% 50%;}
 }
 
-function addTask(){
-  if(!currentUser){
-    alert("Please set a username first");
-    return;
-  }
-
-  const taskInput = document.getElementById("taskInput");
-  const taskText = taskInput.value.trim();
-
-  if(taskText === ""){
-    alert("Please enter a task");
-    return;
-  }
-
-  createTaskElement(taskText, false);
-  saveTasks();
-  taskInput.value = "";
+.todo-container{
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  width: 100%;
+  max-width: 850px;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.5),
+              0 0 35px rgba(37, 99, 235, 0.4);
+  text-align: center;
 }
 
-function createTaskElement(taskText, completed){
-  const li = document.createElement("li");
-
-  const taskSpan = document.createElement("span");
-  taskSpan.textContent = taskText;
-
-  if(completed){
-    taskSpan.classList.add("done");
-  }
-
-  const doneBtn = document.createElement("button");
-  doneBtn.textContent = "Done";
-  doneBtn.className = "done-btn";
-  doneBtn.onclick = function(){
-    taskSpan.classList.toggle("done");
-    saveTasks();
-  };
-
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "Delete";
-  deleteBtn.className = "delete-btn";
-  deleteBtn.onclick = function(){
-    li.remove();
-    saveTasks();
-  };
-
-  const buttonGroup = document.createElement("div");
-  buttonGroup.appendChild(doneBtn);
-  buttonGroup.appendChild(deleteBtn);
-
-  li.appendChild(taskSpan);
-  li.appendChild(buttonGroup);
-  taskList.appendChild(li);
+h1{
+  color: white;
+  margin-bottom: 20px;
+  text-shadow: 0 0 8px rgba(138, 43, 226, 0.8),
+               0 0 15px rgba(37, 99, 235, 0.7);
 }
 
-function saveTasks(){
-  const tasks = [];
+.user-area,
+.input-area{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
 
-  document.querySelectorAll("#taskList li").forEach(li => {
-    const taskText = li.querySelector("span").textContent;
-    const completed = li.querySelector("span").classList.contains("done");
+.user-area input,
+.input-area input{
+  flex: 1;
+  padding: 10px;
+  border: 2px solid rgba(138, 43, 226, 0.7);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.18);
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
 
-    tasks.push({
-      text: taskText,
-      completed: completed
-    });
-  });
+.user-area input::placeholder,
+.input-area input::placeholder{
+  color: #e0e0e0;
+}
 
-  localStorage.setItem(currentUser + "_tasks", JSON.stringify(tasks));
+.user-area button,
+.input-area button{
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #8a2be2, #2563eb);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.user-area button:hover,
+.input-area button:hover{
+  transform: scale(1.05);
+}
+
+.main-content{
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.left-panel{
+  flex: 2;
+}
+
+.right-panel{
+  flex: 1;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 15px;
+  padding: 20px;
+  color: white;
+  text-align: left;
+}
+
+.right-panel h3{
+  margin-top: 0;
+  color: #e9d5ff;
+}
+
+ul{
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+li{
+  background: rgba(255, 255, 255, 0.15);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.done{
+  text-decoration: line-through;
+  color: #d1d5db;
+}
+
+.done-btn{
+  background: #8a2be2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin-right: 5px;
+}
+
+.delete-btn{
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+@media (max-width: 768px){
+  .main-content{
+    flex-direction: column;
+  }
+
+  .right-panel{
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px){
+  .todo-container{
+    padding: 20px;
+  }
+
+  .user-area,
+  .input-area{
+    flex-direction: column;
+  }
+
+  .user-area input,
+  .input-area input,
+  .user-area button,
+  .input-area button{
+    width: 100%;
+  }
+
+  li{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  li div{
+    display: flex;
+    gap: 5px;
+    width: 100%;
+  }
+
+  .done-btn,
+  .delete-btn{
+    flex: 1;
+  }
 }
